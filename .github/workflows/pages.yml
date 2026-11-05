@@ -22,6 +22,7 @@ jobs:
       - run: |
           mkdir _site
           cp index.html _site/index.html
+          cp UE_Routing_Game_QR.png _site/UE_Routing_Game_QR.png
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
