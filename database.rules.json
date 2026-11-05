@@ -1,0 +1,36 @@
+{
+  "rules": {
+    "sessions": {
+      "$room": {
+        ".read": "auth != null",
+        ".write": "auth != null && ((!data.exists() && newData.child('meta').child('ownerUid').val() === auth.uid) || (data.child('meta').child('ownerUid').val() === auth.uid))",
+        "meta": {
+          "ownerUid": {
+            ".validate": "newData.isString() && newData.val() === auth.uid"
+          },
+          "round": {
+            ".validate": "newData.isNumber() && newData.val() >= 1"
+          },
+          "open": {
+            ".validate": "newData.isBoolean()"
+          },
+          "revealed": {
+            ".validate": "newData.isBoolean()"
+          }
+        },
+        "votes": {
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid && root.child('sessions').child($room).child('meta').child('open').val() === true",
+            ".validate": "!newData.exists() || newData.val() === 1 || newData.val() === 2"
+          }
+        },
+        "presence": {
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "!newData.exists() || newData.val() === true"
+          }
+        }
+      }
+    }
+  }
+}
