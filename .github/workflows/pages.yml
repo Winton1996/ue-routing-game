@@ -23,6 +23,8 @@ jobs:
           mkdir _site
           cp index.html _site/index.html
           cp UE_Routing_Game_QR.png _site/UE_Routing_Game_QR.png
+          mkdir -p _site/vendor
+          cp vendor/qrcode.js _site/vendor/qrcode.js
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
