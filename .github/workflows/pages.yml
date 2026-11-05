@@ -25,6 +25,9 @@ jobs:
           cp UE_Routing_Game_QR.png _site/UE_Routing_Game_QR.png
           mkdir -p _site/vendor
           cp vendor/qrcode.js _site/vendor/qrcode.js
+          mkdir -p _site/so-braess
+          cp so-braess/index.html _site/so-braess/index.html
+          cp so-braess/model.js _site/so-braess/model.js
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

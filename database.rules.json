@@ -45,6 +45,41 @@
           }
         }
       }
+    },
+    "braessSessions": {
+      "$room": {
+        ".read": "auth != null",
+        ".write": "auth != null && ((!data.exists() && newData.child('meta').child('ownerUid').val() === auth.uid) || (data.child('meta').child('ownerUid').val() === auth.uid))",
+        "meta": {
+          "ownerUid": {
+            ".validate": "newData.isString() && newData.val() === auth.uid"
+          },
+          "stage": {
+            ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 3"
+          },
+          "round": {
+            ".validate": "newData.isNumber() && newData.val() >= 1"
+          },
+          "open": {
+            ".validate": "newData.isBoolean()"
+          },
+          "revealed": {
+            ".validate": "newData.isBoolean()"
+          }
+        },
+        "votes": {
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid && root.child('braessSessions').child($room).child('meta').child('open').val() === true",
+            ".validate": "!newData.exists() || (newData.isNumber() && newData.val() >= 1 && newData.val() <= (root.child('braessSessions').child($room).child('meta').child('stage').val() === 1 ? 2 : 3))"
+          }
+        },
+        "presence": {
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "!newData.exists() || newData.val() === true"
+          }
+        }
+      }
     }
   }
 }
