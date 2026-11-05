@@ -16,6 +16,20 @@
           },
           "revealed": {
             ".validate": "newData.isBoolean()"
+          },
+          "config": {
+            "a1": {
+              ".validate": "newData.isNumber() && newData.val() >= -1000 && newData.val() <= 1000"
+            },
+            "b1": {
+              ".validate": "newData.isNumber() && newData.val() >= -1000 && newData.val() <= 1000"
+            },
+            "a2": {
+              ".validate": "newData.isNumber() && newData.val() >= -1000 && newData.val() <= 1000"
+            },
+            "b2": {
+              ".validate": "newData.isNumber() && newData.val() >= -1000 && newData.val() <= 1000"
+            }
           }
         },
         "votes": {
